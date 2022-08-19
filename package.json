@@ -8,6 +8,10 @@
     "preview": "nuxt preview"
   },
   "devDependencies": {
-    "nuxt": "3.0.0-rc.8"
+    "@mdi/font": "7.0.96",
+    "nuxt": "3.0.0-rc.8", 
+    "sass": "1.54.4",
+    "sass-loader": "13.0.2",
+    "vuetify": "3.0.0-beta.4"
   }
 }

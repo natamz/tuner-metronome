@@ -1,5 +1,5 @@
 <template>
-  <div>
-    <NuxtWelcome />
-  </div>
+  <v-app>
+    <Metronome></Metronome>
+  </v-app>
 </template>
