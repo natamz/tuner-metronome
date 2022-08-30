@@ -4313,10 +4313,10 @@ vue@^3.2.37:
     "@vue/server-renderer" "3.2.37"
     "@vue/shared" "3.2.37"
 
-vuetify@3.0.0-beta.4:
-  version "3.0.0-beta.4"
-  resolved "https://registry.yarnpkg.com/vuetify/-/vuetify-3.0.0-beta.4.tgz#39d6b9cc38f0e9f5f342dff3d7ca72924fe41735"
-  integrity sha512-saq44U5bDO5z7BNWVeBdyY37BTPOQTeuz7Tm3kyywMEDHhZKw9BhtCo/QodTndoofRSRWXfE7MI2/AEvG/1x+g==
+vuetify@3.0.0-beta.9:
+  version "3.0.0-beta.9"
+  resolved "https://registry.yarnpkg.com/vuetify/-/vuetify-3.0.0-beta.9.tgz#b04e4fc9b81d45d25933808e713d9df60348ee6c"
+  integrity sha512-UL30GE4HdzllkqfcEVThL2UF8AVsALRP7b7n7JqLHp4Pm24QZqiP534cp7A4aGDiX7HXhpjZA/ava0PSarQ+uQ==
 
 wcwidth@^1.0.1:
   version "1.0.1"
