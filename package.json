@@ -13,7 +13,7 @@
     "@storybook/addon-essentials": "6.5.10",
     "@storybook/builder-vite": "0.2.2",
     "@storybook/vue3": "6.5.10",
-    "nuxt": "3.0.0-rc.8",
+    "nuxt": "3.0.0-rc.9",
     "sass": "1.54.6",
     "sass-loader": "13.0.2",
     "vuetify": "3.0.0-beta.9"
