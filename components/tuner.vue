@@ -5,6 +5,7 @@
         <v-icon :icon="isRunning ? 'mdi-microphone' : 'mdi-microphone-off'"></v-icon>
       </v-btn>
       <tuner-display :note="note"></tuner-display>
+      <tuner-meter :cent="note?.cent"></tuner-meter>
     </v-card-text>
   </v-card>
 </template>
