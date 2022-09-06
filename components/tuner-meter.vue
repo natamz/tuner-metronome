@@ -1,9 +1,7 @@
 <template>
   <div id="meter-container">
-    <div id="meter-center"></div>
-    <div id="meter-left"></div>
-    <div id="meter-right"></div>
-    <div id="meter-pointer" :style="`transform:rotate(${pointerDeg}deg)`"></div>
+    <div v-for="i in 11" class="meter" :style="`transform: rotate(${(i - 6) * 10}deg)`"></div>
+    <div id="meter-pointer" :style="`transform:rotate(${pointerDeg}deg); opacity:${opacity}`"></div>
   </div>
 </template>
 
@@ -14,16 +12,13 @@ export default {
   },
   computed: {
     pointerDeg(): number {
-      if (this.cent === undefined) {
-      }
-
       if (-50 <= this.cent && this.cent <= 50) {
-        if (this.cent === 0) {
-        }
-        return (this.cent / 50) * 45;
+        return this.cent;
       }
-
       return 0;
+    },
+    opacity(): number {
+      return this.cent === undefined ? 0.2 : 1;
     },
   },
 };
@@ -32,45 +27,30 @@ export default {
 <style lang="scss" scoped>
 #meter-container {
   margin-top: 20px;
-  height: 100px;
+  height: 200px;
+  max-height: 50vw;
   width: 100%;
-  .meter{
-    
-  }
-  #meter-center {
-    width: 2px;
-    height: 100px;
+
+  * {
+    height: 200px;
+    max-height: 50vw;
     transform-origin: bottom;
     position: absolute;
     right: 50%;
-    border-top: 10px solid #6b6b6b;
   }
-  #meter-left {
+
+  .meter {
     width: 2px;
-    height: 100px;
-    transform-origin: bottom;
-    position: absolute;
-    right: 50%;
-    border-top: 10px solid #6b6b6b;
-    transform: rotate(-45deg);
-  }
-  #meter-right {
-    width: 2px;
-    height: 100px;
-    transform-origin: bottom;
-    position: absolute;
-    right: 50%;
-    border-top: 10px solid #6b6b6b;
-    transform: rotate(45deg);
+    border-top: 2vh solid #7c7c7c;
+    &:nth-child(5n + 1) {
+      border-top: 3vh solid #525252;
+      width: 3px;
+    }
   }
   #meter-pointer {
-    width: 2px;
-    height: 100px;
-    background: #2c3e50;
-    transform-origin: bottom;
+    width: 3px;
     transition: transform 0.5s;
-    position: absolute;
-    right: 50%;
+    border-top: 150px solid #2c3e50;
   }
 }
 </style>
