@@ -24,6 +24,7 @@ export default {
       if (this.isRunning) {
         this.isRunning = false;
         this.note = null;
+        this.$tuner.stop();
         clearInterval(this.timer);
         return;
       }
