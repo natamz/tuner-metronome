@@ -38,6 +38,10 @@ class Tuner {
   }
   stop() {
     audioContext.suspend();
+    stream.getTracks().forEach((track) => {
+      track.stop();
+    });
+    analyser.disconnect();
   }
   getNote(): Note {
     analyser.getByteFrequencyData(dataArray);
