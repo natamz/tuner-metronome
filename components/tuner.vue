@@ -4,6 +4,7 @@
       <v-btn icon @click="onBtnClick">
         <v-icon :icon="isRunning ? 'mdi-microphone' : 'mdi-microphone-off'"></v-icon>
       </v-btn>
+      <tuner-control></tuner-control>
       <tuner-display :note="note"></tuner-display>
       <tuner-meter :cent="note?.cent"></tuner-meter>
     </v-card-text>
