@@ -26,6 +26,7 @@ let analyser: AnalyserNode;
 let stream: MediaStream;
 let bufferLength: number;
 let dataArray: Uint8Array;
+let baseFreq: number = Number(localStorage.getItem("baseFreq") ?? 440);
 
 class Tuner {
   async start() {
@@ -48,8 +49,17 @@ class Tuner {
     const maxindex = dataArray.reduce((iMax, x, i, arr) => (x > arr[iMax] ? i : iMax), 0);
     const freq = Math.round((maxindex * audioContext.sampleRate) / analyser.fftSize);
     if (freq != 0) {
-      return freqToNote(freq, 440);
+      return freqToNote(freq, baseFreq);
     }
+  }
+  set a4(a4: number) {
+    if (400 <= a4 && a4 <= 500) {
+      localStorage.setItem("baseFreq", a4.toString());
+      baseFreq = a4;
+    }
+  }
+  get a4(): number {
+    return baseFreq;
   }
 }
 
