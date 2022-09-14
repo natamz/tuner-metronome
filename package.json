@@ -16,6 +16,6 @@
     "nuxt": "3.0.0-rc.9",
     "sass": "1.54.6",
     "sass-loader": "13.0.2",
-    "vuetify": "3.0.0-beta.9"
+    "vuetify": "3.0.0-beta.10"
   }
 }
