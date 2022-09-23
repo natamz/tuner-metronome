@@ -3,45 +3,34 @@
     <v-card-text>
       <v-row class="mb-4" justify="space-between">
         <v-col>
-          <span class="text-h2 font-weight-light" v-text="bpm"></span>
+          <span class="text-h2 font-weight-light" v-text="-bpm"></span>
           <span class="subheading font-weight-light mr-1">BPM</span>
           <v-fade-transition>
-            <v-avatar
-              v-if="isRunning"
-              class="mb-1 v-avatar--metronome"
-              size="12"
-            ></v-avatar>
+            <v-avatar v-if="isRunning" class="mb-1 v-avatar--metronome" size="12"></v-avatar>
           </v-fade-transition>
         </v-col>
         <v-col>
           <v-btn theme="dark" icon elevation="0" @click="onPlayBtnClick">
-            <v-icon
-              size="large"
-              :icon="isRunning ? 'mdi-pause' : 'mdi-play'"
-            ></v-icon>
+            <v-icon size="large" :icon="isRunning ? 'mdi-pause' : 'mdi-play'"></v-icon>
           </v-btn>
         </v-col>
       </v-row>
     </v-card-text>
-    <v-slider v-model="bpm" track-color="grey" min="40" max="300" :step="1">
-      <template v-slot:prepend>
-        <v-btn
-          size="small"
-          variant="text"
-          icon="mdi-minus"
-          @click="decrementBpm"
-        ></v-btn>
-      </template>
 
-      <template v-slot:append>
-        <v-btn
-          size="small"
-          variant="text"
-          icon="mdi-plus"
-          @click="incrementBpm"
-        ></v-btn>
-      </template>
-    </v-slider>
+    <div id="slider-container">
+      <v-slider
+        v-model="bpm"
+        track-color="grey"
+        min="-300"
+        max="-40"
+        :step="1"
+        direction="vertical"
+        class="pointer"
+        :style="`transform:rotate(${pointerDeg}deg);`"
+      ></v-slider>
+      <v-btn size="large" icon="mdi-minus" @click="decrementBpm" class="minus-btn"></v-btn>
+      <v-btn size="large" icon="mdi-plus" @click="incrementBpm" class="plus-btn"></v-btn>
+    </div>
   </v-card>
 </template>
 
@@ -56,13 +45,16 @@ export default {
     return {
       isRunning: false,
       intervalId: null,
-      bpm: 60,
+      pointerIntervalId: null,
+      bpm: -60,
       beat: 4,
+      pointerDeg: 0,
     };
   },
   methods: {
     onPlayBtnClick() {
       clearInterval(this.intervalId);
+      clearInterval(this.pointerIntervalId);
       if (this.isRunning) {
         this.isRunning = false;
       } else {
@@ -73,19 +65,33 @@ export default {
     start() {
       clearInterval(this.intervalId);
       let count = 0;
+      let sign = 1;
+      this.startPointer(sign);
       this.intervalId = setInterval(() => {
+        sign *= -1;
+        this.startPointer(sign);
         this.$audio.low();
         if (++count == this.beat) {
           this.$audio.high();
           count = 0;
         }
-      }, (60 / this.bpm) * 1000);
+      }, (60 / -this.bpm) * 1000);
     },
     incrementBpm() {
-      this.bpm = Math.min(MAX_BPM, this.bpm + 1);
+      this.bpm = -Math.min(MAX_BPM, -this.bpm + 1);
     },
     decrementBpm() {
-      this.bpm = Math.max(MIN_BPM, this.bpm - 1);
+      this.bpm = -Math.max(MIN_BPM, -this.bpm - 1);
+    },
+    startPointer(sign) {
+      clearInterval(this.pointerIntervalId);
+      const fps = 50;
+      const diff = (-this.bpm / 60 / fps) * Math.PI * sign;
+      let x = 0;
+      this.pointerIntervalId = setInterval(() => {
+        this.pointerDeg = Math.sin(x) * 30;
+        x += diff;
+      }, 1000 / fps);
     },
   },
   watch: {
@@ -99,7 +105,25 @@ export default {
     },
   },
   mounted() {
-    this.bpm = localStorage.getItem(LSKeys.bpm) ?? 60;
+    this.bpm = localStorage.getItem(LSKeys.bpm) ?? -60;
   },
 };
 </script>
+
+<style lang="scss" scoped>
+#slider-container {
+  > button {
+    position: absolute;
+    bottom: 10px;
+    &.minus-btn {
+      left: 10vw;
+    }
+    &.plus-btn {
+      right: 10vw;
+    }
+  }
+  .pointer {
+    transform-origin: bottom;
+  }
+}
+</style>
