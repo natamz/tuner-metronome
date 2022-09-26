@@ -8,6 +8,9 @@
     "preview": "nuxt preview",
     "storybook": "start-storybook"
   },
+  "engines": {
+    "node": "16.x"
+  },
   "devDependencies": {
     "@mdi/font": "7.0.96",
     "@storybook/addon-essentials": "6.5.12",
