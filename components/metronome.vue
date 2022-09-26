@@ -1,4 +1,6 @@
 <template>
+  <metronome-setting ref="settingsDialog" @save="saveSetting"></metronome-setting>
+
   <v-card>
     <v-card-text>
       <v-row class="mb-4" justify="space-between">
@@ -12,6 +14,11 @@
         <v-col>
           <v-btn theme="dark" icon elevation="0" @click="onPlayBtnClick">
             <v-icon size="large" :icon="isRunning ? 'mdi-pause' : 'mdi-play'"></v-icon>
+          </v-btn>
+        </v-col>
+        <v-col>
+          <v-btn icon @click="$refs.settingsDialog.showDialog()">
+            <v-icon>mdi-cog-outline</v-icon>
           </v-btn>
         </v-col>
       </v-row>
@@ -93,6 +100,9 @@ export default {
         x += diff;
       }, 1000 / fps);
     },
+    saveSetting() {
+      this.beat = localStorage.getItem(LSKeys.beat);
+    },
   },
   watch: {
     bpm: {
@@ -106,6 +116,7 @@ export default {
   },
   mounted() {
     this.bpm = localStorage.getItem(LSKeys.bpm) ?? -60;
+    this.beat = localStorage.getItem(LSKeys.beat) ?? 4;
   },
 };
 </script>
