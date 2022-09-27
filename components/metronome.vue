@@ -3,13 +3,10 @@
 
   <v-card>
     <v-card-text>
-      <v-row class="mb-4" justify="space-between">
+      <v-row>
         <v-col>
           <span class="text-h2 font-weight-light" v-text="-bpm"></span>
           <span class="subheading font-weight-light mr-1">BPM</span>
-          <v-fade-transition>
-            <v-avatar v-if="isRunning" class="mb-1 v-avatar--metronome" size="12"></v-avatar>
-          </v-fade-transition>
         </v-col>
         <v-col>
           <v-btn theme="dark" icon elevation="0" @click="onPlayBtnClick">
@@ -22,22 +19,22 @@
           </v-btn>
         </v-col>
       </v-row>
-    </v-card-text>
 
-    <div id="slider-container">
-      <v-slider
-        v-model="bpm"
-        track-color="grey"
-        min="-300"
-        max="-40"
-        :step="1"
-        direction="vertical"
-        class="pointer"
-        :style="`transform:rotate(${pointerDeg}deg);`"
-      ></v-slider>
-      <v-btn size="large" icon="mdi-minus" @click="decrementBpm" class="minus-btn"></v-btn>
-      <v-btn size="large" icon="mdi-plus" @click="incrementBpm" class="plus-btn"></v-btn>
-    </div>
+      <div id="slider-container">
+        <v-slider
+          v-model="bpm"
+          track-color="grey"
+          min="-300"
+          max="-40"
+          :step="1"
+          direction="vertical"
+          class="pointer"
+          :style="`transform:rotate(${pointerDeg}deg);`"
+        ></v-slider>
+        <v-btn size="large" icon="mdi-minus" @click="decrementBpm" class="minus-btn"></v-btn>
+        <v-btn size="large" icon="mdi-plus" @click="incrementBpm" class="plus-btn"></v-btn>
+      </div>
+    </v-card-text>
   </v-card>
 </template>
 
@@ -123,6 +120,7 @@ export default {
 
 <style lang="scss" scoped>
 #slider-container {
+  height: 30vh;
   > button {
     position: absolute;
     bottom: 10px;
@@ -135,6 +133,15 @@ export default {
   }
   .pointer {
     transform-origin: bottom;
+  }
+}
+</style>
+<style lang="scss">
+#slider-container > .v-slider {
+  height: 100%;
+  .v-input__control {
+    height: 25vh;
+    min-height: 25vh;
   }
 }
 </style>
