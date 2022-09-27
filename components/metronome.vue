@@ -1,7 +1,7 @@
 <template>
   <metronome-setting ref="settingsDialog" @save="saveSetting"></metronome-setting>
 
-  <v-card>
+  <v-card style="min-height: 50vh">
     <v-card-text>
       <v-row>
         <v-col>

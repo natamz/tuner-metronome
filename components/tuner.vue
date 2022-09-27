@@ -1,5 +1,5 @@
 <template>
-  <v-card>
+  <v-card style="min-height: 50vh">
     <v-card-text>
       <v-btn icon @click="onBtnClick">
         <v-icon :icon="isRunning ? 'mdi-microphone' : 'mdi-microphone-off'"></v-icon>
