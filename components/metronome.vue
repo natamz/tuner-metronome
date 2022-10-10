@@ -44,6 +44,11 @@ import { LSKeys } from "@/consts/localStorageKeys";
 const MAX_BPM: number = 300;
 const MIN_BPM: number = 40;
 
+// 時刻をミリ秒で返す
+function GetTime() {
+  return new Date().getTime();
+}
+
 export default {
   data() {
     return {
@@ -87,15 +92,15 @@ export default {
     decrementBpm() {
       this.bpm = -Math.max(MIN_BPM, -this.bpm - 1);
     },
-    startPointer(sign) {
+    startPointer(sign: number) {
       clearInterval(this.pointerIntervalId);
-      const fps = 50;
-      const diff = (-this.bpm / 60 / fps) * Math.PI * sign;
-      let x = 0;
+      const a = sign * (Math.PI / 1000) * (this.bpm / 60);
+      const startTime = GetTime();
+
       this.pointerIntervalId = setInterval(() => {
-        this.pointerDeg = Math.sin(x) * 30;
-        x += diff;
-      }, 1000 / fps);
+        const t = GetTime() - startTime;
+        this.pointerDeg = Math.sin(a * t) * 30;
+      }, 30);
     },
     saveSetting() {
       this.beat = localStorage.getItem(LSKeys.beat);
