@@ -13161,10 +13161,10 @@ vue@^3.2.39:
     "@vue/server-renderer" "3.2.39"
     "@vue/shared" "3.2.39"
 
-vuetify@3.0.0-beta.13:
-  version "3.0.0-beta.13"
-  resolved "https://registry.yarnpkg.com/vuetify/-/vuetify-3.0.0-beta.13.tgz#04af3a85b3852617da9bc50263f1128cd43e83fa"
-  integrity sha512-CgDyKCIBZ0ogKUxRw3gNswx9GA6eSSp7otZcJapWJCVuon/RooQPQjf3bDuRb5ZpJ55NkX13ugjl2nq+b0U8SA==
+vuetify@3.7.5:
+  version "3.7.5"
+  resolved "https://registry.yarnpkg.com/vuetify/-/vuetify-3.7.5.tgz#087632a0c6e32ee7114e046bcbf52a55f43e52e1"
+  integrity sha512-5aiSz8WJyGzYe3yfgDbzxsFATwHvKtdvFAaUJEDTx7xRv55s3YiOho/MFhs5iTbmh2VT4ToRgP0imBUP660UOw==
 
 walker@^1.0.7, walker@~1.0.5:
   version "1.0.8"
